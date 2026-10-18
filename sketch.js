@@ -1,18 +1,48 @@
-function preload() {
-  // put preload code here
-}
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  console.log('p5.js version:', p5.VERSION);
-  // put setup code here
-  const message =
-    "This is a template repository\nfor the course Laboratorio di Computergrafica\nCommunication Design, Politecnico di Milano";
-  textAlign(CENTER, CENTER);
-  textSize(16);
-  text(message, width / 2, height / 2);
+  background(120,0, 150, 70);
+  let numeroGlifi = 500; 
+  let numeroColonne = ceil(sqrt(numeroGlifi)); //calcola la radice quadrata 
+  let numeroRighe = ceil(sqrt(numeroGlifi)); //ceil arrotonda per eccesso round arrotonda classico
+  let dimColonna = windowWidth/numeroColonne; 
+  let dimRiga = windowHeight/numeroRighe; 
+
+  let xCorrente = 0; 
+  let yCorrente = 0; 
+
+  for (let g = 0; g < numeroGlifi; g++) {
+    
+    mioGlifo(xCorrente + 0.5*dimColonna, yCorrente + 0.5*dimRiga, dimRiga*0.8); 
+    xCorrente = xCorrente + dimColonna; 
+    if (xCorrente  >= windowWidth) {
+      yCorrente = yCorrente + dimRiga;
+      xCorrente =  0; 
+    }
+  }
 }
 
 function draw() {
-  // put drawing code here
+  //
+}
+
+function mioGlifo(_x, _y, _size) {
+  push();
+
+  //primo pallino
+  translate(_x, _y); //così mi posiziono nel centro della pagina (da 0 0 a centro)
+  circle(0, 0, _size);
+
+  for (let i = 0; i < 4; i++) {
+    //secondo pallino
+    angleMode(DEGREES);
+    let miarotazione = random (360); 
+    let mioraggio = random (_size/10, _size/4);
+    push();
+      rotate(miarotazione);
+      translate(_size/2, 0); 
+      circle (0,0,mioraggio);
+    pop();
+  }
+
+  pop();
 }
