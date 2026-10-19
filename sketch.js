@@ -1,20 +1,30 @@
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background(120,0, 150, 70);
-  let numeroGlifi = 500; 
-  let numeroColonne = ceil(sqrt(numeroGlifi)); //calcola la radice quadrata 
-  let numeroRighe = ceil(sqrt(numeroGlifi)); //ceil arrotonda per eccesso round arrotonda classico
-  let dimColonna = windowWidth/numeroColonne; 
-  let dimRiga = windowHeight/numeroRighe; 
+  angleMode(DEGREES);
+  background(255);
+  noStroke();
+
+  
+  let numeroGlifi = 350; // devo calcolare quante colonne e righe servono per contenere 500 glifi.
+  let numeroColonne = 12; //calcola la radice quadrata --> radice quadrata di 500 = 23
+  let numeroRighe = ceil(numeroGlifi / numeroColonne); //ceil arrotonda per eccesso round arrotonda classico
+ // pra calcolo altezza e lunghezza di ogni cella
+  let dimColonna = windowWidth/numeroColonne; //
+  let dimRiga = dimColonna; // celle quadrate
 
   let xCorrente = 0; 
   let yCorrente = 0; 
+  // tengono traccia di dove sono nella griglia e partono da angolo in alto a sx
 
+  // uso il ciclo for per disegnsare i i glifi
   for (let g = 0; g < numeroGlifi; g++) {
+    let dimensione = dimColonna * random(0.5, 0.9)
+    // queste sotto servono per posizionare il glifo nella cella
+   
+    mioGlifo(xCorrente + 0.5*dimColonna, yCorrente + 0.5*dimRiga, dimensione); 
     
-    mioGlifo(xCorrente + 0.5*dimColonna, yCorrente + 0.5*dimRiga, dimRiga*0.8); 
-    xCorrente = xCorrente + dimColonna; 
-    if (xCorrente  >= windowWidth) {
+    xCorrente = xCorrente + dimColonna; // dopo aver disegnato ti sposti a destra di una cella per riscrivere un nuovo glifo
+    if (xCorrente  >= windowWidth) { // questo if va qui (dopo lo spostamento) perchè devo prima spostarmi e poi controllare se sono arrivata in fondo alla riga
       yCorrente = yCorrente + dimRiga;
       xCorrente =  0; 
     }
@@ -22,27 +32,29 @@ function setup() {
 }
 
 function draw() {
-  //
 }
 
-function mioGlifo(_x, _y, _size) {
+function mioGlifo(_x, _y, _size) { // scrivo cosi perche sono parametri che ricevo dal ciclo
   push();
 
-  //primo pallino
-  translate(_x, _y); //così mi posiziono nel centro della pagina (da 0 0 a centro)
-  circle(0, 0, _size);
+  translate(_x, _y); //NB: translate sposta l’origine nel centro della cella, così mi posiziono nel centro della pagina (da 0 0 a centro).
+   // faccio prima translate di disegnare perchè il disegno usa le coordinate al centro
 
-  for (let i = 0; i < 4; i++) {
-    //secondo pallino
-    angleMode(DEGREES);
-    let miarotazione = random (360); 
-    let mioraggio = random (_size/10, _size/4);
-    push();
-      rotate(miarotazione);
-      translate(_size/2, 0); 
-      circle (0,0,mioraggio);
-    pop();
+     // CHE VARIA: colore e rotazione
+   rotate(random(360));
+   stroke(random(0, 150), random(50, 220), random(180, 255));
+
+   // NON VARIA MAI: la forma
+   let spirale = _size / 12;
+
+
+  for (let i = 1; i <= 12; i++) {
+    rect(0, 0, i * spirale, spirale * 0.6);   // disegno un lato lungo i passi
+    translate(i * spirale, 0);    // mi sposto alla fine del lato
+    rotate(90);                 // giro di 90 gradi
+  
   }
 
   pop();
-}
+  }
+
