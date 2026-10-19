@@ -11,10 +11,10 @@ function setup() {
   let dimRiga = dimColonna; // celle quadrate
 
   createCanvas(windowWidth, dimRiga * numeroRighe + descrizione); // l'ho messa qui e scritta così perchè altrimenti la pagina non scorre
-  background(0, 51, 153);
+  background(41, 73, 128);
 
     //qua metto le cose per la descrizione
-    fill (255, 223, 0);
+    fill (240, 255, 0);
     textSize(45);
      text("Second Assignment - Glyphs System ", 40, 100);
 
@@ -50,7 +50,7 @@ function mioGlifo(_x, _y, _size) { // scrivo cosi perche sono parametri che rice
 
      // colore e rotazione variano
    rotate(random(360));
-     fill(random(240, 255), random(190, 255), random(0, 80));
+  fill(random(150, 255), random(50, 255), random(0, 200));
   noStroke(); // prima mi veniva fuori bordo nero!!!!
 
    // NON VARIA MAI: la forma
