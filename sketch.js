@@ -1,18 +1,27 @@
+let descrizione = 150; 
+
 function setup() {
   angleMode(DEGREES);
 
-  let numeroGlifi = 1000; // devo calcolare quante colonne e righe servono per contenere 500 glifi.
-  let numeroColonne = 12; //calcola la radice quadrata --> radice quadrata di 500 = 23
+  let numeroGlifi = 1000; // devo calcolare quante colonne e righe servono per contenere 1000 glifi.
+  let numeroColonne = 12; //senno viene un casino
   let numeroRighe = ceil(numeroGlifi / numeroColonne); //ceil arrotonda per eccesso round arrotonda classico
  // pra calcolo altezza e lunghezza di ogni cella
   let dimColonna = windowWidth/numeroColonne; //
   let dimRiga = dimColonna; // celle quadrate
 
-  createCanvas(windowWidth, dimRiga * numeroRighe); // l'ho messa qui e scritta così perchè altrimenti la pagina non scorre
-    background(41, 51, 128);
+  createCanvas(windowWidth, dimRiga * numeroRighe + descrizione); // l'ho messa qui e scritta così perchè altrimenti la pagina non scorre
+  background(0, 51, 153);
+
+    //qua metto le cose per la descrizione
+    fill (255, 223, 0);
+    textSize(45);
+     text("Second Assignment - Glyphs System ", 40, 100);
+
+
 
   let xCorrente = 0; 
-  let yCorrente = 0; 
+  let yCorrente = descrizione; 
   // tengono traccia di dove sono nella griglia e partono da angolo in alto a sx
 
   // uso il ciclo for per disegnsare i i glifi
