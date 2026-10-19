@@ -1,16 +1,15 @@
 function setup() {
-  createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
-  background(255);
-  noStroke();
 
-  
-  let numeroGlifi = 350; // devo calcolare quante colonne e righe servono per contenere 500 glifi.
+  let numeroGlifi = 1000; // devo calcolare quante colonne e righe servono per contenere 500 glifi.
   let numeroColonne = 12; //calcola la radice quadrata --> radice quadrata di 500 = 23
   let numeroRighe = ceil(numeroGlifi / numeroColonne); //ceil arrotonda per eccesso round arrotonda classico
  // pra calcolo altezza e lunghezza di ogni cella
   let dimColonna = windowWidth/numeroColonne; //
   let dimRiga = dimColonna; // celle quadrate
+
+  createCanvas(windowWidth, dimRiga * numeroRighe); // l'ho messa qui e scritta così perchè altrimenti la pagina non scorre
+    background(41, 51, 128);
 
   let xCorrente = 0; 
   let yCorrente = 0; 
@@ -18,7 +17,7 @@ function setup() {
 
   // uso il ciclo for per disegnsare i i glifi
   for (let g = 0; g < numeroGlifi; g++) {
-    let dimensione = dimColonna * random(0.5, 0.9)
+    let dimensione = dimColonna * random(0.1, 0.7) // da molto piccola a molto grande
     // queste sotto servono per posizionare il glifo nella cella
    
     mioGlifo(xCorrente + 0.5*dimColonna, yCorrente + 0.5*dimRiga, dimensione); 
@@ -40,16 +39,17 @@ function mioGlifo(_x, _y, _size) { // scrivo cosi perche sono parametri che rice
   translate(_x, _y); //NB: translate sposta l’origine nel centro della cella, così mi posiziono nel centro della pagina (da 0 0 a centro).
    // faccio prima translate di disegnare perchè il disegno usa le coordinate al centro
 
-     // CHE VARIA: colore e rotazione
+     // colore e rotazione variano
    rotate(random(360));
-   stroke(random(0, 150), random(50, 220), random(180, 255));
+     fill(random(240, 255), random(190, 255), random(0, 80));
+  noStroke(); // prima mi veniva fuori bordo nero!!!!
 
    // NON VARIA MAI: la forma
    let spirale = _size / 12;
 
 
   for (let i = 1; i <= 12; i++) {
-    rect(0, 0, i * spirale, spirale * 0.6);   // disegno un lato lungo i passi
+    rect(0, 0, i * spirale, spirale * 0.6);   // disegno un lato 
     translate(i * spirale, 0);    // mi sposto alla fine del lato
     rotate(90);                 // giro di 90 gradi
   
