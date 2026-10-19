@@ -11,7 +11,7 @@ function setup() {
   let dimRiga = dimColonna; // celle quadrate
 
   createCanvas(windowWidth, dimRiga * numeroRighe + descrizione); // l'ho messa qui e scritta così perchè altrimenti la pagina non scorre
-  background(41, 73, 128);
+  background(0, 66, 128);
 
     //qua metto le cose per la descrizione
     fill (240, 255, 0);
